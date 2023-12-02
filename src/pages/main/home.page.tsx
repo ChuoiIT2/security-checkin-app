@@ -1,7 +1,6 @@
 import { useAsyncEffect } from 'ahooks';
-import { Button, Picker, PickerView } from 'antd-mobile';
+import { Button, Picker } from 'antd-mobile';
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 
 const HomePage = () => {
   const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -9,7 +8,7 @@ const HomePage = () => {
   const [listVideoDevices, setListVideoDevices] = useState<MediaDeviceInfo[]>(
     [],
   );
-  const [videoLoaded, setVideoLoaded] = React.useState(false);
+  const [, setVideoLoaded] = React.useState(false);
   const [visible, setVisible] = useState(false);
   const [value, setValue] = useState<any>();
 

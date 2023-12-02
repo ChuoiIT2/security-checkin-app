@@ -13,11 +13,12 @@ const StyledWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: calc(100vh - 120px);
+  /* height: 100%; */
 `;
 
 const MainLayout = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const tabs = useMemo(
     () => [
@@ -48,6 +49,12 @@ const MainLayout = () => {
         <Outlet />
 
         <TabBar
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            width: '100%',
+            borderTop: 'solid 1px var(--adm-color-border)',
+          }}
           activeKey={location.pathname}
           onChange={(key) => {
             navigate(key);
