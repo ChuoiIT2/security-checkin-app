@@ -15,7 +15,6 @@
   "dependencies": {
     "@tanstack/react-query": "^5.8.6",
     "ahooks": "^3.7.8",
-    "antd": "^5.11.3",
     "antd-mobile": "^5.33.0",
     "axios": "^1.6.2",
     "i18n-keys": "^1.0.8",
@@ -24,8 +23,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
+    "react-qr-scanner": "^1.0.0-alpha.11",
     "react-router-dom": "^6.20.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",

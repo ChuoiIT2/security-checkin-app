@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { App as AntdApp } from 'antd';
+import { ConfigProvider } from 'antd-mobile';
+import enUS from 'antd-mobile/es/locales/en-US';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from './routes';
@@ -9,9 +10,9 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AntdApp>
+      <ConfigProvider locale={enUS}>
         <RouterProvider router={router} />
-      </AntdApp>
+      </ConfigProvider>
     </QueryClientProvider>
   );
 }
