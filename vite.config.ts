@@ -12,15 +12,15 @@ export default defineConfig({
     viteTsconfigPaths(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icon.svg'],
+      includeAssets: ['logo.png'],
       manifest: {
-        name: 'Security Checkin', // The name of your app
-        short_name: 'Security Checkin', // The short name of your app
-        theme_color: '#fff', // The theme color of your app
-        background_color: '#fff', // The background color of your app
-        display: 'standalone', // The display mode of your app
-        scope: '/', // The scope of your app
-        start_url: '/', // The start URL of your app
+        name: 'Security Checkin',
+        short_name: 'Security Checkin',
+        theme_color: '#fff',
+        background_color: '#fff',
+        display: 'standalone',
+        scope: '/',
+        start_url: '/',
         icons: [
           {
             src: 'pwa-64x64.png',
