@@ -1,12 +1,21 @@
 import { EResponseCode } from '@/configs/response-code.enum';
 
-export interface IHttpResponse<T> {
+export type THttpResponse<T> = {
   code: EResponseCode;
   data: T;
   message: string;
-}
+};
 
-export interface IContextAction<T, P = any> {
+export type TContextAction<T, P = any> = {
   type: T;
   payload?: P;
-}
+};
+
+export type TUploadImageResult = {
+  id: string;
+  url: string;
+  secureUrl: string;
+  width: number;
+  height: number;
+  format: string;
+};
