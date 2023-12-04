@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { useDeviceType } from '@/hooks/useDeviceType';
+import { useDeviceType } from '@/hooks/use-device-type';
 
 const StyledWrapper = styled.div<{ isMobile?: boolean }>`
   display: flex;
