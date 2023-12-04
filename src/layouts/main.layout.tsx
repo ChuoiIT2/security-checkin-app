@@ -8,17 +8,25 @@ import { useMemo } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledWrapper = styled.div`
+import { useDeviceType } from '@/hooks/useDeviceType';
+
+const StyledWrapper = styled.div<{ isMobile?: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 120px);
-  /* height: 100%; */
+  background-color: #fff;
+  height: calc(100vh - ${(props) => (props.isMobile ? '120px' : '0px')});
+`;
+
+const StyledTabBar = styled(TabBar)`
+  border-top: solid 1px var(--adm-color-border);
+  background-color: var(--adm-color-background);
 `;
 
 const MainLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobile = useDeviceType().isMobile();
 
   const tabs = useMemo(
     () => [
@@ -45,16 +53,10 @@ const MainLayout = () => {
     <>
       <SafeArea position="top" />
 
-      <StyledWrapper>
+      <StyledWrapper isMobile={isMobile}>
         <Outlet />
 
-        <TabBar
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            width: '100%',
-            borderTop: 'solid 1px var(--adm-color-border)',
-          }}
+        <StyledTabBar
           activeKey={location.pathname}
           onChange={(key) => {
             navigate(key);
@@ -63,7 +65,7 @@ const MainLayout = () => {
           {tabs.map((item) => (
             <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
           ))}
-        </TabBar>
+        </StyledTabBar>
       </StyledWrapper>
 
       <SafeArea position="bottom" />
