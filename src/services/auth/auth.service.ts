@@ -68,6 +68,11 @@ class AuthService {
       return false;
     }
   }
+
+  async logout() {
+    Cookies.remove(ACCESS_TOKEN_KEY);
+    Cookies.remove(REFRESH_TOKEN_KEY);
+  }
 }
 
 const authService = new AuthService();

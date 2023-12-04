@@ -1,20 +1,18 @@
-import { SafeArea, TabBar } from 'antd-mobile';
+import { SafeArea, TabBar, Toast } from 'antd-mobile';
 import {
   AppOutline,
   SystemQRcodeOutline,
   UserOutline,
 } from 'antd-mobile-icons';
-import { useMemo } from 'react';
+import { ToastHandler } from 'antd-mobile/es/components/toast';
+import { useEffect, useMemo, useRef } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import useAuth from '@/hooks/use-auth';
 import { useDeviceType } from '@/hooks/use-device-type';
 
 const StyledWrapper = styled.div<{ isMobile?: boolean }>`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #fff;
   height: calc(100vh - ${(props) => (props.isMobile ? '120px' : '0px')});
 `;
 
@@ -24,9 +22,33 @@ const StyledTabBar = styled(TabBar)`
 `;
 
 const MainLayout = () => {
+  const toastHandler = useRef<ToastHandler>();
+
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useDeviceType().isMobile();
+
+  const authQuery = useAuth();
+
+  useEffect(() => {
+    if (authQuery.isLoading) {
+      toastHandler.current = Toast.show({
+        icon: 'loading',
+      });
+    }
+    if (!authQuery.isLoading) {
+      toastHandler.current?.close();
+    }
+    if (authQuery.isError) {
+      navigate('/auth/login', { state: { redirect: location.pathname } });
+    }
+  }, [
+    authQuery.isError,
+    authQuery.isLoading,
+    authQuery.isSuccess,
+    location.pathname,
+    navigate,
+  ]);
 
   const tabs = useMemo(
     () => [
@@ -54,7 +76,9 @@ const MainLayout = () => {
       <SafeArea position="top" />
 
       <StyledWrapper isMobile={isMobile}>
-        <Outlet />
+        <div className="h-full flex flex-col bg-white">
+          <Outlet />
+        </div>
 
         <StyledTabBar
           activeKey={location.pathname}

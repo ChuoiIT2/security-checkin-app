@@ -35,3 +35,10 @@ export type TRefreshTokenDto = {
 export type TRefreshTokenResult = {
   accessToken: string;
 };
+
+export type TAuthState = {
+  currentUser?: TUserDto;
+  isAuth: boolean;
+};
+
+export type TAuthActionType = 'logout' | 'setIsAuth' | 'setCurrentUser';
