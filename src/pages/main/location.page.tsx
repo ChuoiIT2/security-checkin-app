@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { List, PullToRefresh } from 'antd-mobile';
+import { Dialog, List, PullToRefresh } from 'antd-mobile';
 
 import ListItemSkeleton from '@/components/list-item-skeleton';
+import LocationDetailView from '@/components/location-view';
 import locationService from '@/services/locations/location.service';
 
 const LocationPage = () => {
@@ -31,6 +32,24 @@ const LocationPage = () => {
               key={location.id}
               description={location.address}
               clickable
+              onClick={() =>
+                Dialog.show({
+                  title: 'Location detail',
+                  closeOnAction: true,
+                  closeOnMaskClick: true,
+                  content: (
+                    <LocationDetailView location={location} showDescription />
+                  ),
+                  actions: [
+                    [
+                      {
+                        key: 'ok',
+                        text: 'Ok',
+                      },
+                    ],
+                  ],
+                })
+              }
             >
               {location.name}
             </List.Item>

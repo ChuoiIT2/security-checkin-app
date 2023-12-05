@@ -7,7 +7,7 @@ import authReducer from './auth.reducer';
 
 const initialState: TAuthState = {
   isAuth: false,
-  currentUser: undefined,
+  currentUser: null,
 };
 
 export const AuthContext = createContext<

@@ -37,7 +37,7 @@ class AuthService {
       throw new Error('Access token is required');
     }
 
-    const response = await httpService.request<THttpResponse<TUserDto>>({
+    const response = await httpService.request<TUserDto>({
       url: '/users/get-me',
       method: 'GET',
     });
@@ -53,13 +53,13 @@ class AuthService {
         return false;
       }
 
-      const response = await axios.post<THttpResponse<TRefreshTokenResult>>(
+      const response = await axios.post<TRefreshTokenResult>(
         `${API_BASE_URL}/auth/refresh-token`,
         null,
         { params: { refreshToken } },
       );
 
-      const data = response.data.data;
+      const data = response.data;
 
       Cookies.set('accessToken', data.accessToken);
 

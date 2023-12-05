@@ -14,7 +14,7 @@ const authReducer = (
       return {
         ...state,
         isAuth: false,
-        currentUser: undefined,
+        currentUser: null,
       };
     }
 

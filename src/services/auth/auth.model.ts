@@ -37,7 +37,7 @@ export type TRefreshTokenResult = {
 };
 
 export type TAuthState = {
-  currentUser?: TUserDto;
+  currentUser: TUserDto | null;
   isAuth: boolean;
 };
 

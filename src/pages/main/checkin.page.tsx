@@ -23,7 +23,6 @@ const CheckinPage = () => {
             <List.Item
               key={item.id}
               description={dayjs(item.time).format('YYYY/MM/DD, HH:mm:ss')}
-              clickable
             >
               {item.location.name}
             </List.Item>
