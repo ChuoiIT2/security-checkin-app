@@ -83,7 +83,7 @@ class HttpService {
     data,
     method,
     contentType,
-  }: THttpRequest): Promise<T> {
+  }: THttpRequest): Promise<THttpResponse<T>> {
     const config: AxiosRequestConfig = {
       url,
       method,
@@ -96,7 +96,7 @@ class HttpService {
 
     const response = await this.http.request(config);
 
-    return response.data as T;
+    return response.data as THttpResponse<T>;
   }
 
   async uploadImage(file: File): Promise<TUploadImageResult> {

@@ -19,3 +19,19 @@ export type TUploadImageResult = {
   height: number;
   format: string;
 };
+
+export type TPaginatedInput = {
+  limit?: number;
+  page?: number;
+};
+
+export type TPaginatedResult<T> = {
+  items: T[];
+  meta: {
+    totalItems: number;
+    itemCount: number;
+    itemsPerPage: number;
+    totalPages: number;
+    currentPage: number;
+  };
+};

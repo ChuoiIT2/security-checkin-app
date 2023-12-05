@@ -1,6 +1,7 @@
 import { SafeArea, TabBar, Toast } from 'antd-mobile';
 import {
-  AppOutline,
+  LocationOutline,
+  SetOutline,
   SystemQRcodeOutline,
   UserOutline,
 } from 'antd-mobile-icons';
@@ -10,11 +11,6 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import useAuth from '@/hooks/use-auth';
-import { useDeviceType } from '@/hooks/use-device-type';
-
-const StyledWrapper = styled.div<{ isMobile?: boolean }>`
-  height: calc(100vh - ${(props) => (props.isMobile ? '120px' : '0px')});
-`;
 
 const StyledTabBar = styled(TabBar)`
   border-top: solid 1px var(--adm-color-border);
@@ -26,7 +22,6 @@ const MainLayout = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isMobile = useDeviceType().isMobile();
 
   const authQuery = useAuth();
 
@@ -58,6 +53,11 @@ const MainLayout = () => {
         icon: <SystemQRcodeOutline />,
       },
       {
+        key: '/locations',
+        title: 'Locations',
+        icon: <LocationOutline />,
+      },
+      {
         key: '/profile',
         title: 'Profile',
         icon: <UserOutline />,
@@ -65,7 +65,7 @@ const MainLayout = () => {
       {
         key: '/settings',
         title: 'Settings',
-        icon: <AppOutline />,
+        icon: <SetOutline />,
       },
     ],
     [],
@@ -75,22 +75,24 @@ const MainLayout = () => {
     <>
       <SafeArea position="top" />
 
-      <StyledWrapper isMobile={isMobile}>
-        <div className="h-full flex flex-col bg-white">
-          <Outlet />
-        </div>
+      <>
+        <div className="h-[calc(100vh-120px)] flex flex-col justify-between">
+          <div className="flex-1 flex flex-col bg-white overflow-scroll">
+            <Outlet />
+          </div>
 
-        <StyledTabBar
-          activeKey={location.pathname}
-          onChange={(key) => {
-            navigate(key);
-          }}
-        >
-          {tabs.map((item) => (
-            <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
-          ))}
-        </StyledTabBar>
-      </StyledWrapper>
+          <StyledTabBar
+            activeKey={location.pathname}
+            onChange={(key) => {
+              navigate(key);
+            }}
+          >
+            {tabs.map((item) => (
+              <TabBar.Item key={item.key} icon={item.icon} title={item.title} />
+            ))}
+          </StyledTabBar>
+        </div>
+      </>
 
       <SafeArea position="bottom" />
     </>
