@@ -1,14 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { List, PullToRefresh, Skeleton } from 'antd-mobile';
-import styled from 'styled-components';
+import { List, PullToRefresh } from 'antd-mobile';
 
+import ListItemSkeleton from '@/components/list-item-skeleton';
 import locationService from '@/services/locations/location.service';
-
-const StyledSkeleton = styled(Skeleton)`
-  --width: 100%;
-  --height: 50px;
-  --border-radius: 8px;
-`;
 
 const LocationPage = () => {
   const locationsQuery = useQuery({
@@ -20,8 +14,6 @@ const LocationPage = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log(locationsQuery.data?.items);
-
   return (
     <div className="bg-slate-50">
       <PullToRefresh onRefresh={() => locationsQuery.refetch()}>
@@ -31,7 +23,7 @@ const LocationPage = () => {
           {locationsQuery.isLoading &&
             [...Array(10)].map((_, index) => (
               <List.Item key={index}>
-                <StyledSkeleton key={index} animated />
+                <ListItemSkeleton key={index} animated />
               </List.Item>
             ))}
           {locationsQuery.data?.items?.map((location) => (

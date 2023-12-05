@@ -4,10 +4,10 @@ import AuthLayout from '@/layouts/auth.layout';
 import MainLayout from '@/layouts/main.layout';
 import LoginPage from '@/pages/auth/login.page';
 import RegisterPage from '@/pages/auth/register.page';
+import CheckinPage from '@/pages/main/checkin.page';
 import HomePage from '@/pages/main/home.page';
 import LocationPage from '@/pages/main/location.page';
 import ProfilePage from '@/pages/main/profile.page';
-import SettingsPage from '@/pages/main/settings.page';
 
 export const router = createBrowserRouter([
   {
@@ -16,8 +16,8 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: '/locations', element: <LocationPage /> },
+      { path: '/checkins', element: <CheckinPage /> },
       { path: '/profile', element: <ProfilePage /> },
-      { path: '/settings', element: <SettingsPage /> },
     ],
   },
   {

@@ -1,8 +1,8 @@
 import { SafeArea, TabBar, Toast } from 'antd-mobile';
 import {
   LocationOutline,
-  SetOutline,
   SystemQRcodeOutline,
+  TagOutline,
   UserOutline,
 } from 'antd-mobile-icons';
 import { ToastHandler } from 'antd-mobile/es/components/toast';
@@ -58,14 +58,14 @@ const MainLayout = () => {
         icon: <LocationOutline />,
       },
       {
+        key: '/checkins',
+        title: 'Checkins',
+        icon: <TagOutline />,
+      },
+      {
         key: '/profile',
         title: 'Profile',
         icon: <UserOutline />,
-      },
-      {
-        key: '/settings',
-        title: 'Settings',
-        icon: <SetOutline />,
       },
     ],
     [],
@@ -76,7 +76,7 @@ const MainLayout = () => {
       <SafeArea position="top" />
 
       <>
-        <div className="h-[calc(100vh-120px)] flex flex-col justify-between">
+        <div className="h-screen flex flex-col justify-between">
           <div className="flex-1 flex flex-col bg-white overflow-scroll">
             <Outlet />
           </div>

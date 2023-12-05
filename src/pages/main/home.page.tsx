@@ -1,31 +1,47 @@
 import { QrScanner } from '@yudiel/react-qr-scanner';
-import { AutoCenter, Button } from 'antd-mobile';
+import { AutoCenter, Button, List } from 'antd-mobile';
+import dayjs from 'dayjs';
 import { useState } from 'react';
 
+import ListItemSkeleton from '@/components/list-item-skeleton';
+import useGetListCheckins from '@/services/checkins/checkin.query';
+
 const HomePage = () => {
-  const [curResult, setCurResult] = useState<string>('');
+  const [curQR, setCurQR] = useState<string>('');
+  console.log(curQR);
+
+  const checkinsQuery = useGetListCheckins();
 
   return (
-    <div className="h-full flex flex-col bg-slate-50 p-2">
-      <div className="rounded-md overflow-hidden">
-        <QrScanner
-          onDecode={(result) => setCurResult(result)}
-          onError={(error) => console.log(error?.message)}
-        />
-
-        <div className="bg-white p-2">
-          <p className="text-sm text-gray-500">Result:</p>
-          <p className="text-lg text-gray-700">{curResult}</p>
+    <div className="h-full flex flex-col bg-slate-50">
+      <div className="m-2 rounded-xl p-2 bg-slate-200">
+        <div className="rounded-xl overflow-hidden">
+          <QrScanner
+            onDecode={(result) => setCurQR(result)}
+            onError={(error) => console.log(error?.message)}
+          />
         </div>
-
-        <div className="my-2"></div>
-
-        <AutoCenter>
-          <Button color="primary" fill="solid">
-            Save
-          </Button>
-        </AutoCenter>
       </div>
+
+      <div className="my-2"></div>
+
+      <List header="Checked in data">
+        {checkinsQuery.isLoading &&
+          [...Array(10)].map((_, index) => (
+            <List.Item key={index}>
+              <ListItemSkeleton key={index} animated />
+            </List.Item>
+          ))}
+        {checkinsQuery.data?.items?.map((item) => (
+          <List.Item
+            key={item.id}
+            description={dayjs(item.time).format('YYYY/MM/DD, HH:mm:ss')}
+            clickable
+          >
+            {item.location.name}
+          </List.Item>
+        ))}
+      </List>
     </div>
   );
 };
