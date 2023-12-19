@@ -2,7 +2,13 @@ import { Grid } from 'antd-mobile';
 
 import { TLocationDto } from '@/services/locations/location.model';
 
-const DialogListItem = ({ title, value }: { title: string; value: string }) => {
+const DialogListItem = ({
+  title,
+  value,
+}: {
+  title: string;
+  value: string | number;
+}) => {
   return (
     <>
       <Grid.Item span={1} className="text-slate-500 text-sm">
