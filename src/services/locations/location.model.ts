@@ -5,8 +5,8 @@ export type TGetListLocationsInput = TPaginatedInput;
 export type TLocationDto = {
   id: number;
   name: string;
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
   address: string;
   description?: string;
 };
