@@ -151,7 +151,9 @@ const HomePage = () => {
       <div className="flex justify-center items-center">
         <div className="text-slate-500 mr-2">Current geolocation:</div>
         <span className="text-blue-500 text-base">
-          {curGeoLocation?.latitude}, {curGeoLocation?.longitude}
+          {curGeoLocation?.latitude.toFixed(4)}
+          {', '}
+          {curGeoLocation?.longitude.toFixed(4)}
         </span>
       </div>
       <div className="my-1"></div>
