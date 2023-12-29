@@ -1,7 +1,7 @@
 {
   "name": "security-checkin-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -64,8 +64,10 @@
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.2.1"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
+  },
   "main": "index.js",
-  "repository": "ssh://git@gitlab.yootek.com.vn:60010/iot/web-admin.git",
-  "author": "ninhTKieen <ninhtrungkien2811@gmail.com>",
+  "author": "chuoi",
   "license": "MIT"
 }
